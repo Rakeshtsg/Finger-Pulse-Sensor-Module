@@ -1,1 +1,33 @@
 
+// connect the finger-pulse sensor module to digital pin 2
+const int pulsePin = 2;
+
+// initialize a variable to store the pulse count
+int pulseCount = 0;
+
+void setup() {
+  // initialize the serial port
+  Serial.begin(9600);
+
+  // set the pulsePin as an input
+  pinMode(pulsePin, INPUT);
+}
+
+void loop() {
+  // check if the pulsePin is HIGH
+  if (digitalRead(pulsePin) == HIGH) {
+    // increment the pulse count
+    pulseCount++;
+  }
+
+  // wait for one second
+  delay(1000);
+
+  // calculate and print the heart rate
+  int heartRate = pulseCount * 6;
+  Serial.print("Heart rate: ");
+  Serial.println(heartRate);
+
+  // reset the pulse count for the next reading
+  pulseCount = 0;
+}
